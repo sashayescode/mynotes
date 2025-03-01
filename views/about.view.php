@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+    
+    <?php require __DIR__ . '/../partials/navigation.php' ?>
+
+    <h1>Hi About page</h1>
+
+</body>
+
+</html>
