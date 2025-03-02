@@ -1,10 +1,11 @@
 <?php
 
-require basePath('app/Validator.php');
-
 $config = require basePath('config/config.php');
 
 $db = new DataBase($config);
+
+$errors = [];
+$header = htmlspecialchars($_POST['header']?? '')?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = Validator::string($_POST['header']);
@@ -17,4 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
     }
 }
-require view('notes/create.view.php');
+view('notes/create.view.php',
+[
+    'errors'=> $errors,
+    'header'=>$header,
+]);

@@ -12,7 +12,7 @@
     
 <?php require basePath('partials/navigation.php') ?>
 
-    <h1>Hi base page</h1>
+    <h1><?= $header ?></h1>
 
 </body>
 

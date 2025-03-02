@@ -10,9 +10,9 @@
 
 <body>
     
-    <?php require require basePath('partials/navigation.php') ?>
+    <?php require basePath('partials/navigation.php') ?>
 
-    <h1>Hi About page</h1>
+    <h1><?= $header ?></h1>
 
 </body>
 

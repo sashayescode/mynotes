@@ -20,7 +20,8 @@ function basePath($path)
     return BASE_PATH . $path;
 }
 
-function view($view)
+function view($view, $attributes = [])
 {
-    return basePath("views/$view");
+    extract($attributes);
+    require basePath("views/$view");
 }
