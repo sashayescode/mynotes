@@ -1,4 +1,4 @@
 <?php
 
-require __DIR__ . '/../views/index.view.php';
+require view('index.view.php');
 

@@ -1,6 +1,6 @@
 <?php
 
-$config = require __DIR__ . '/../../config/config.php';
+$config = require basePath('config/config.php');
 
 $db = new DataBase($config);
 
@@ -12,4 +12,4 @@ $note = $db->query('select * from notes where id = :id',
 
 authorisation($note['user_id'] == $currentUser);
 
-require __DIR__ . '/../../views/notes/show.view.php';
+require view('notes/show.view.php');

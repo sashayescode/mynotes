@@ -1,3 +1,3 @@
 <?php
 
-require __DIR__ . '/../views/about.view.php';
+require view('about.view.php');

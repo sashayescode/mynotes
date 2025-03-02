@@ -10,7 +10,7 @@
 
 <body>
     
-    <?php require __DIR__ . '/../partials/navigation.php' ?>
+    <?php require require basePath('partials/navigation.php') ?>
 
     <h1>Hi About page</h1>
 

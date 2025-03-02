@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__ . '/../../app/Validator.php';
+require basePath('app/Validator.php');
 
-$config = require __DIR__ . '/../../config/config.php';
+$config = require basePath('config/config.php');
 
 $db = new DataBase($config);
 
@@ -17,4 +17,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
     }
 }
-require __DIR__ . '/../../views/notes/create.view.php';
+require view('notes/create.view.php');

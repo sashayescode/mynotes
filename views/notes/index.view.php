@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php require __DIR__ . '/../../partials/navigation.php' ?>
+    <?php require basePath('partials/navigation.php') ?>
 
     <h1>Hi notes page</h1>
     <ul class="list-disc list-inside">
