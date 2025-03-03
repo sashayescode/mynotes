@@ -1,16 +1,38 @@
 <?php
 
+use app\DataBase;
+
 $config = require basePath('config/config.php');
 
 $db = new DataBase($config);
 
-$id = $_GET['id']?? null;
 $currentUser = 1;
 
-$note = $db->query('select * from notes where id = :id', 
-['id'=> $_GET['id']])->findOrFail();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-authorisation($note['user_id'] == $currentUser);
+    $note = $db->query(
+        'select * from notes where id = :id',
+        ['id' => $_GET['id']]
+    )->findOrFail();
+
+    authorisation($note['user_id'] == $currentUser);
+
+    $db->query('delete from notes where id = :id', [
+        'id' => htmlspecialchars($_POST['id'] ?? '')
+    ]);
+    header('Location: /notes');
+    exit();
+} else {
+
+    $id = $_GET['id'] ?? null;
+
+    $note = $db->query(
+        'select * from notes where id = :id',
+        ['id' => $_GET['id']]
+    )->findOrFail();
+
+    authorisation($note['user_id'] == $currentUser);
+}
 
 view('notes/show.view.php', [
     'note' => $note,

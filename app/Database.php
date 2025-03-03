@@ -1,5 +1,8 @@
 <?php
 
+namespace app;
+use PDO;
+
 class DataBase
 {
     public $connection;

@@ -1,9 +1,11 @@
 <?php
 
-return [
-    '/' => __DIR__ . '/../controllers/index.php',
-    '/about' => __DIR__ . '/../controllers/about.php',
-    '/notes' => __DIR__ . '/../controllers/notes/show.php',
-    '/note' => __DIR__ . '/../controllers/notes/note.php',
-    '/note/create' => __DIR__ . '/../controllers/notes/create.php',
-];
+$router->get('/', 'index.php');
+
+$router->get('/about', 'about.php');
+
+$router->get('/notes', 'notes/show.php');
+
+$router->get('/note', 'notes/note.php');
+
+$router->get('/note/create', 'notes/create.php');

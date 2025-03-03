@@ -1,4 +1,5 @@
 <?php
+use app\Database;
 
 $config = require basePath('config/config.php');
 

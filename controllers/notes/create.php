@@ -1,4 +1,7 @@
 <?php
+use app\DataBase;
+use app\Validator;
+
 
 $config = require basePath('config/config.php');
 
@@ -8,6 +11,7 @@ $errors = [];
 $header = htmlspecialchars($_POST['header']?? '')?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $errors = Validator::string($_POST['header']);
 
     if (empty($errors)) {
@@ -17,6 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             [':header' => $textValue, ':user_id' => 1]
         );
     }
+
+    header('Location: /notes');
+    exit();
 }
 view('notes/create.view.php',
 [
