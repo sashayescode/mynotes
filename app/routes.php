@@ -9,3 +9,9 @@ $router->get('/notes', 'notes/show.php');
 $router->get('/note', 'notes/note.php');
 
 $router->get('/note/create', 'notes/create.php');
+
+$router->post('/note/create', 'notes/create.php');
+
+$router->delete('/note', 'notes/note.php');
+
+$router->get('/note/edit', 'notes/edit.php');

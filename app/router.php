@@ -22,6 +22,7 @@ class Router
             'controller' => $controllerPath,
             'method' => 'GET',
         ];
+
     }
 
     public function delete($url, $controllerPath)
@@ -55,7 +56,6 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['url'] === $url && $route['method'] === strtoupper($method)) {
-                
                 return require basePath("controllers/" . $route['controller']);
             }
         };
@@ -71,26 +71,3 @@ class Router
         die();
     }
 }
-
-
-// <?php
-
-// use app\Response;
-
-// $routes = require('routes.php');
-// $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-// define('PATH', trim($uri, 'public'));
-
-
-
-
-// function mapping($routePath, $path){
-//     if(array_key_exists($path, $routePath)){
-//         require $routePath[$path];
-//     }else {
-//         abort(Response::NOT_FOUND);
-//     }
-
-// };
-
-// mapping($routes, PATH);

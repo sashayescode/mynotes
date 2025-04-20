@@ -1,10 +1,8 @@
 <?php
 
-use app\DataBase;
+use app\App;
 
-$config = require basePath('config/config.php');
-
-$db = new DataBase($config);
+$db = App::resolve('app\Database');
 
 $currentUser = 1;
 

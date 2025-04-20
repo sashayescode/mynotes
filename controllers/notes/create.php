@@ -1,17 +1,15 @@
 <?php
-use app\DataBase;
+use app\App;
+use app\Database;
 use app\Validator;
 
-
-$config = require basePath('config/config.php');
-
-$db = new DataBase($config);
+$db = App::resolve(Database::class);
 
 $errors = [];
 $header = htmlspecialchars($_POST['header']?? '')?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    
     $errors = Validator::string($_POST['header']);
 
     if (empty($errors)) {
