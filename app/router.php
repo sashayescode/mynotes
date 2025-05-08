@@ -2,63 +2,73 @@
 
 namespace app;
 
+use app\middleware\Guest;
+use app\middleware\Auth;
+use app\middleware\Middleware;
+
 class Router
 {
     protected $routes = [];
 
-    public function post($url, $controllerPath)
+    protected function add($url, $controllerPath, $method)
     {
         $this->routes[] = [
             'url' => $url,
             'controller' => $controllerPath,
-            'method' => 'POST',
+            'method' => $method,
+            'middleware' => null,
         ];
+
+        return $this;
+    }
+
+    public function post($url, $controllerPath)
+    {
+        return $this->add($url, $controllerPath, 'POST');
     }
 
     public function get($url, $controllerPath)
     {
-        $this->routes[] = [
-            'url' => $url,
-            'controller' => $controllerPath,
-            'method' => 'GET',
-        ];
+        return $this->add($url, $controllerPath, 'GET');
 
     }
 
     public function delete($url, $controllerPath)
     {
-        $this->routes[] = [
-            'url' => $url,
-            'controller' => $controllerPath,
-            'method' => 'DELETE',
-        ];
+        return $this->add($url, $controllerPath, 'DELETE');
+
     }
 
     public function put($url, $controllerPath)
     {
-        $this->routes[] = [
-            'url' => $url,
-            'controller' => $controllerPath,
-            'method' => 'PUT',
-        ];
+        return $this->add($url, $controllerPath, 'PUT');
+
     }
 
     public function patch($url, $controllerPath)
     {
-        $this->routes[] = [
-            'url' => $url,
-            'controller' => $controllerPath,
-            'method' => 'PATCH',
-        ];
+        return $this->add($url, $controllerPath, 'PATCH');
+
+    }
+
+    public function only($key)
+    {
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
     }
 
     public function route($url, $method)
     {
         foreach ($this->routes as $route) {
             if ($route['url'] === $url && $route['method'] === strtoupper($method)) {
+
+                if($route['middleware']){
+                    Middleware::resolve($route['middleware']);
+                }
+
                 return require basePath("controllers/" . $route['controller']);
             }
-        };
+        }
+        ;
         $this->abort();
     }
 

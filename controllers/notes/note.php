@@ -23,13 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
 
     $id = $_GET['id'] ?? null;
+    if (isset($id)) {
+        $note = $db->query(
+            'select * from notes where id = :id',
+            ['id' => $_GET['id']]
+        )->findOrFail();
 
-    $note = $db->query(
-        'select * from notes where id = :id',
-        ['id' => $_GET['id']]
-    )->findOrFail();
+        authorisation($note['user_id'] == $currentUser);
+    } else {
+        header('Location: /notes');
+        exit();
+    }
 
-    authorisation($note['user_id'] == $currentUser);
 }
 
 view('notes/show.view.php', [

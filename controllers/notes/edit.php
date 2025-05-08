@@ -1,9 +1,24 @@
 <?php
 
-$id=$_GET['id'];
+use app\Database;
+use app\App;
 
-dd($id);
+$db = App::resolve(Database::class);
+$currentUser = 1;
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $id = $_GET['id'];
 
-//You stopped here, your next steps are to edit the edit.vierw.php for the accepting the id, if thre is an id, then you load this view and display the header of the note,
+    $note = $db->query(
+        'SELECT * FROM notes WHERE id = :id',
+        ['id' => $id]
+    )->findOrFail();
 
-view('/notes/edit.view.php');
+    (authorisation($currentUser === $note['user_id']));
+}
+
+//fix the git auth stuff with the key, so i can commit changes
+
+view('/notes/edit.view.php', [
+    'id' => $id,
+    'note' => $note,
+]);

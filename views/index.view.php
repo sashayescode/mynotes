@@ -12,6 +12,9 @@
     
 <?php require basePath('partials/navigation.php') ?>
 
+<p>Hello <?= isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Guest' ?></p>
+ 
+
     <h1><?= $header ?></h1>
 
 </body>
