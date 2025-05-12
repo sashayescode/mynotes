@@ -35,8 +35,8 @@ if ($user) {
         'name' => $name,
     ]);
 
-    $_SESSION['loggedIn'] = true;
-    $_SESSION['name'] = $name;
+    $_SESSION['user']['email'] = $email;
+    $_SESSION['user']['name'] = $name;
 }
 
 if (!empty($errors)) {

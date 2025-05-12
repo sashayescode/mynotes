@@ -27,3 +27,19 @@ function view($view, $attributes = [])
     extract($attributes);
     require basePath("views/$view");
 }
+
+
+function login($user)
+{
+    $_SESSION['user']['email'] = $user['email'];
+    $_SESSION['user']['name'] = $user['name'];
+    header('Location: /');
+    exit();
+}
+
+function logout()
+{
+    $_SESSION = [];
+    header('Location: /login');
+    exit();
+}
