@@ -28,18 +28,8 @@ function view($view, $attributes = [])
     require basePath("views/$view");
 }
 
-
-function login($user)
+function redirect($path)
 {
-    $_SESSION['user']['email'] = $user['email'];
-    $_SESSION['user']['name'] = $user['name'];
-    header('Location: /');
-    exit();
-}
-
-function logout()
-{
-    $_SESSION = [];
-    header('Location: /login');
+    header("Location: $path");
     exit();
 }
