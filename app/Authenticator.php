@@ -4,6 +4,7 @@ namespace app;
 
 use app\App;
 use app\Database;
+use app\Session;
 
 
 class Authenticator
@@ -34,7 +35,7 @@ class Authenticator
 
     public function logout()
     {
-        $_SESSION = [];
+        Session::destroy();
         redirect('/login');
     }
 }

@@ -3,23 +3,38 @@
 namespace Http\Forms;
 
 use app\Validator;
+use app\ValidationExpection;
 
 class LoginValidation
 {
 
     protected $errors = [];
 
-    public function validate($email, $password)
-    {
-        if (!empty(Validator::email($email))) {
+    public function __construct($attributes)
+    {        
+        if (!empty(Validator::email($attributes['email']))) {
             $this->errors['email'] = Validator::$errors['text'];
         }
 
-        if (!empty(Validator::string($password, 1))) {
+        if (!empty(Validator::string($attributes['password'], 1))) {
             $this->errors['password'] = Validator::$errors['text'];
         }
+    }
 
-        return empty($this->errors);
+    public static function validate($attributes)
+    {
+        $instance = new static($attributes);
+
+        if($instance->hasErrors()){
+            throw new ValidationExpection();
+        }
+
+        return $instance;
+    }
+
+    public function hasErrors()
+    {
+        return count($this->errors);
     }
 
     public function getErrors()
